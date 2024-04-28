@@ -1,8 +1,11 @@
 #include "Matrix3x3.h"
 
+#include "MathHelper.h"
 
 #include <iostream>
 #include <cmath>
+
+#include <assert.h>
 
 CMatrix3x3::CMatrix3x3(float v11, float v12, float v13, float v21, float v22, float v23, float v31, float v32, float v33)
 	:m_vertex1(v11, v12, v13),
@@ -59,6 +62,68 @@ void CMatrix3x3::Show() const
 	std::cout << std::endl;
 }
 
+void CMatrix3x3::SetRotate(ERotateType type, float fAngle)
+{
+	float fRadian = GetRadian(fAngle);
+
+	switch (type)
+	{
+	case ERT_X:
+
+		m_vertex1.SetValue11(1.0f);
+		m_vertex1.SetValue12(0.0f);
+		m_vertex1.SetValue13(0.0f);
+
+		m_vertex2.SetValue11(0.0f);
+		m_vertex2.SetValue12(cos(fRadian));
+		m_vertex2.SetValue13(sin(fRadian));
+
+		m_vertex3.SetValue11(0.0f);
+		m_vertex3.SetValue12(-sin(fRadian));
+		m_vertex3.SetValue13(cos(fRadian));
+
+		break;
+	case ERT_Y:
+		m_vertex1.SetValue11(cos(fRadian));
+		m_vertex1.SetValue12(0.0f);
+		m_vertex1.SetValue13(-sin(fRadian));
+
+		m_vertex2.SetValue11(0.0f);
+		m_vertex2.SetValue12(1.0f);
+		m_vertex2.SetValue13(0.0f);
+
+		m_vertex3.SetValue11(sin(fRadian));
+		m_vertex3.SetValue12(0.0f);
+		m_vertex3.SetValue13(cos(fRadian));
+
+		break;
+	case ERT_Z:
+		m_vertex1.SetValue11(cos(fRadian));
+		m_vertex1.SetValue12(sin(fRadian));
+		m_vertex1.SetValue13(0.0f);
+
+		m_vertex2.SetValue11(-sin(fRadian));
+		m_vertex2.SetValue12(cos(fRadian));
+		m_vertex2.SetValue13(0.0f);
+
+		m_vertex3.SetValue11(0.0f);
+		m_vertex3.SetValue12(0.0f);
+		m_vertex3.SetValue13(1.0f);
+
+		break;
+	default:
+		assert(0);
+		return;
+	}
+}
+
+void CMatrix3x3::SetIdentityMatrix()
+{
+	m_vertex1 = CVertex(1.0f, 0.0f, 0.0f);
+	m_vertex2 = CVertex(0.0f, 1.0f, 0.0f);
+	m_vertex3 = CVertex(0.0f, 0.0f, 1.0f);
+}
+
 CMatrix3x3 operator*(const CMatrix3x3& left, const CMatrix3x3& right)
 {
 	float fV11 = left.m_vertex1.m_v11 * right.m_vertex1.m_v11 + left.m_vertex1.m_v12 * right.m_vertex2.m_v11 + left.m_vertex1.m_v13 * right.m_vertex3.m_v11;
@@ -79,11 +144,11 @@ CMatrix3x3 operator*(const CMatrix3x3& left, const CMatrix3x3& right)
 
 CVertex operator*(const CVertex& vertex, const CMatrix3x3& matrix)
 {
-	float fV11 = vertex.m_v11 * matrix.m_vertex1.m_v11 + vertex.m_v12 * matrix.m_vertex2.m_v11 + vertex.m_v11 * matrix.m_vertex3.m_v11;
+	float fV11 = vertex.m_v11 * matrix.m_vertex1.m_v11 + vertex.m_v12 * matrix.m_vertex2.m_v11 + vertex.m_v13 * matrix.m_vertex3.m_v11;
 
-	float fV12 = vertex.m_v12 * matrix.m_vertex1.m_v12 + vertex.m_v12 * matrix.m_vertex2.m_v12 + vertex.m_v12 * matrix.m_vertex3.m_v12;
+	float fV12 = vertex.m_v11 * matrix.m_vertex1.m_v12 + vertex.m_v12 * matrix.m_vertex2.m_v12 + vertex.m_v13 * matrix.m_vertex3.m_v12;
 
-	float fV13 = vertex.m_v13 * matrix.m_vertex1.m_v13 + vertex.m_v13 * matrix.m_vertex2.m_v13 + vertex.m_v11 * matrix.m_vertex3.m_v11;
+	float fV13 = vertex.m_v11 * matrix.m_vertex1.m_v13 + vertex.m_v12 * matrix.m_vertex2.m_v13 + vertex.m_v13 * matrix.m_vertex3.m_v13;
 
 	return CVertex(fV11, fV12, fV13);
 

@@ -43,6 +43,21 @@ void CVertex::Show() const
 		<< " " << ToZero(m_v13);
 }
 
+void CVertex::SetValue11(float fValue)
+{
+	m_v11 = fValue;
+}
+
+void CVertex::SetValue12(float fValue)
+{
+	m_v12 = fValue;
+}
+
+void CVertex::SetValue13(float fValue)
+{
+	m_v13 = fValue;
+}
+
 CVertex operator*(const CVertex& vertex, float fValue)
 {
 	return CVertex(vertex.m_v11 * fValue, vertex. m_v12 * fValue, vertex.m_v13*fValue);

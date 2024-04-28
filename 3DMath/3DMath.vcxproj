@@ -153,10 +153,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="3DMath.cpp" />
+    <ClCompile Include="MathHelper.cpp" />
     <ClCompile Include="Matrix3x3.cpp" />
     <ClCompile Include="Vertex.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MathHelper.h" />
     <ClInclude Include="Matrix3x3.h" />
     <ClInclude Include="Vertex.h" />
   </ItemGroup>

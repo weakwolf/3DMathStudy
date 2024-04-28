@@ -16,6 +16,12 @@ public:
 	bool operator==(const CVertex& other);
 public:
 	void Show() const;
+
+public:
+	void SetValue11(float fValue);
+	void SetValue12(float fValue);
+	void SetValue13(float fValue);
+
 	
 public:
 	float m_v11;

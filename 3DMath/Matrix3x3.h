@@ -3,7 +3,15 @@
 
 #include "Vertex.h"
 
-class CVertex;
+// 旋转矩阵绕坐标轴类型
+enum ERotateType
+{
+	ERT_Invalid = 0,
+	ERT_X,		// X轴
+	ERT_Y,		// Y轴
+	ERT_Z,		// Z轴
+	ERT_Count
+};
 
 // 矩阵类定义
 // 3x3
@@ -23,11 +31,16 @@ public:
 	void Show() const;
 
 public:
+	// 设置矩阵为旋转矩阵--绕X轴，Y轴，Z轴
+	void SetRotate(ERotateType type, float fAngle);
+	// 重置为单位矩阵
+	void SetIdentityMatrix();
+
+public:
 	// 使用三个行向量表示
 	CVertex m_vertex1;
 	CVertex m_vertex2;
 	CVertex m_vertex3;
-	
 };
 
 CMatrix3x3 operator*(const CMatrix3x3& left, const CMatrix3x3& right);
