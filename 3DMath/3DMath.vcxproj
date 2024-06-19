@@ -155,12 +155,12 @@
     <ClCompile Include="3DMath.cpp" />
     <ClCompile Include="MathHelper.cpp" />
     <ClCompile Include="Matrix3x3.cpp" />
-    <ClCompile Include="Vertex.cpp" />
+    <ClCompile Include="Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MathHelper.h" />
     <ClInclude Include="Matrix3x3.h" />
-    <ClInclude Include="Vertex.h" />
+    <ClInclude Include="Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

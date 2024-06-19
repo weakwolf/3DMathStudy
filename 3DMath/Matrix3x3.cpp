@@ -15,7 +15,7 @@ CMatrix3x3::CMatrix3x3(float v11, float v12, float v13, float v21, float v22, fl
 
 }
 
-CMatrix3x3::CMatrix3x3(const CVertex& v1, const CVertex& v2, const CVertex& v3)
+CMatrix3x3::CMatrix3x3(const CVector& v1, const CVector& v2, const CVector& v3)
 	:m_vertex1(v1),
 	m_vertex2(v2),
 	m_vertex3(v3)
@@ -52,6 +52,8 @@ CMatrix3x3& CMatrix3x3::CMatrix3x3::operator=(const CMatrix3x3& other)
 
 void CMatrix3x3::Show() const
 {
+	std::cout << std::endl;
+
 	m_vertex1.Show();
 	std::cout << std::endl;
 
@@ -59,6 +61,8 @@ void CMatrix3x3::Show() const
 	std::cout << std::endl;
 
 	m_vertex3.Show();
+	std::cout << std::endl;
+
 	std::cout << std::endl;
 }
 
@@ -117,11 +121,19 @@ void CMatrix3x3::SetRotate(ERotateType type, float fAngle)
 	}
 }
 
+void CMatrix3x3::SetScale(float x, float y, float z)
+{
+	SetIdentityMatrix();
+	m_vertex1.SetValue11(x);
+	m_vertex2.SetValue12(y);
+	m_vertex3.SetValue13(z);
+}
+
 void CMatrix3x3::SetIdentityMatrix()
 {
-	m_vertex1 = CVertex(1.0f, 0.0f, 0.0f);
-	m_vertex2 = CVertex(0.0f, 1.0f, 0.0f);
-	m_vertex3 = CVertex(0.0f, 0.0f, 1.0f);
+	m_vertex1 = CVector(1.0f, 0.0f, 0.0f);
+	m_vertex2 = CVector(0.0f, 1.0f, 0.0f);
+	m_vertex3 = CVector(0.0f, 0.0f, 1.0f);
 }
 
 CMatrix3x3 operator*(const CMatrix3x3& left, const CMatrix3x3& right)
@@ -142,7 +154,7 @@ CMatrix3x3 operator*(const CMatrix3x3& left, const CMatrix3x3& right)
 	return CMatrix3x3(fV11, fV12, fV12, fV21, fV22, fV23, fV31, fV32, fV33);
 }
 
-CVertex operator*(const CVertex& vertex, const CMatrix3x3& matrix)
+CVector operator*(const CVector& vertex, const CMatrix3x3& matrix)
 {
 	float fV11 = vertex.m_v11 * matrix.m_vertex1.m_v11 + vertex.m_v12 * matrix.m_vertex2.m_v11 + vertex.m_v13 * matrix.m_vertex3.m_v11;
 
@@ -150,6 +162,6 @@ CVertex operator*(const CVertex& vertex, const CMatrix3x3& matrix)
 
 	float fV13 = vertex.m_v11 * matrix.m_vertex1.m_v13 + vertex.m_v12 * matrix.m_vertex2.m_v13 + vertex.m_v13 * matrix.m_vertex3.m_v13;
 
-	return CVertex(fV11, fV12, fV13);
+	return CVector(fV11, fV12, fV13);
 
 }

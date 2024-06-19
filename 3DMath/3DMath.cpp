@@ -3,20 +3,25 @@
 
 #include <iostream>
 
-#include "Vertex.h"
+#include "Vector.h"
 #include "Matrix3x3.h"
+
+inline void LineFeed()
+{
+	std::cout << std::endl;
+}
 
 int main()
 {
-   std::cout << "Hello Vertex!\n"<<std::endl;
+   //std::cout << "Hello Vector!\n"<<std::endl;
 
-   //CVertex vertex1(1.0f, 1.2f, 1.3f);
+   //CVector vertex1(1.0f, 1.2f, 1.3f);
    //vertex1.Show();
    //std::cout << std::endl;
-   //CVertex vertex2(2.0f, 3.0f, 1.4f);
+   //CVector vertex2(2.0f, 3.0f, 1.4f);
    //vertex2.Show();
    //std::cout << std::endl;
-   //CVertex vertex3(7.0f, 2.3f, 1.5f);
+   //CVector vertex3(7.0f, 2.3f, 1.5f);
    //vertex3.Show();
    //std::cout << std::endl;
 
@@ -33,7 +38,7 @@ int main()
    //matrix3.Show();
 
    // 行向量与矩阵相乘
-   //CVertex temp1(2.0f, 3.0f, 4.0f);
+   //CVector temp1(2.0f, 3.0f, 4.0f);
    //CMatrix3x3 temp2;
    //auto res = temp1 * temp2;
    //res.Show();
@@ -54,17 +59,26 @@ int main()
    //std::cout << std::endl;
 
 
-   //CVertex vertex1(1.0f, 1.2f, 1.3f);
+   //CVector vertex1(1.0f, 1.2f, 1.3f);
    //auto temp = vertex1 * 2.0f;
    //temp.Show();
 
+   //CMatrix3x3 matrix;
+   //matrix.SetRotate(ERT_X, 90.0f);
+   //CVector vertex(1.0f, 2.0f, 3.0f);
+   //vertex.Show();
+   //std::cout << std::endl;
+   //CVector res = vertex * matrix;
+   //res.Show();
+
    CMatrix3x3 matrix;
-   matrix.SetRotate(ERT_X, 90.0f);
-   CVertex vertex(1.0f, 2.0f, 3.0f);
-   vertex.Show();
-   std::cout << std::endl;
-   CVertex res = vertex * matrix;
-   res.Show();
+   matrix.SetScale(1.0f, 2.0f, 3.0f);
+   CVector v1(1, 2, 3);
+   v1.Show();
+   LineFeed();
+   v1 = v1 * matrix;
+   v1.Show();
+   LineFeed();
 
    std::cout << "\n" << std::endl;
    system("pause");

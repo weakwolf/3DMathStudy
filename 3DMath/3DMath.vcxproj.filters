@@ -18,24 +18,24 @@
     <ClCompile Include="3DMath.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Vertex.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Matrix3x3.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="MathHelper.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
+    <ClCompile Include="Vector.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Vertex.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Matrix3x3.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="MathHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
